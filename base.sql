@@ -24,6 +24,31 @@ CREATE TABLE produit (
 );
 
 
+-- Table : produit_membre 
+CREATE TABLE produit_membre (
+    id_produit_membre INT AUTO_INCREMENT PRIMARY KEY,
+    id_produit INT NOT NULL,
+    id_membre INT NOT NULL,
+    prix_vente INT,
+    quantite_dispo INT,
+    date_dispo DATE,
+    CONSTRAINT fk_pm_produit 
+        FOREIGN KEY (id_produit) REFERENCES produit(id_produit),
+    CONSTRAINT fk_pm_membre 
+        FOREIGN KEY (id_membre) REFERENCES membre(id_membre)
+);
+
+-- Table : vente 
+CREATE TABLE vente (
+    id_vente INT AUTO_INCREMENT PRIMARY KEY,
+    id_produit_membre INT NOT NULL,
+    date DATE,
+    heure TIME,
+    quantite INT,
+    CONSTRAINT fk_vente_pm 
+        FOREIGN KEY (id_produit_membre) REFERENCES produit_membre(id_produit_membre)
+);
+
 -- INSERTION DES CATEGORIES
 INSERT INTO categorie (nom_categorie) VALUES
 ('Plat'),

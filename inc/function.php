@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
     function db_connect(){
         static $connect;
         $connect=mysqli_connect('localhost','root','','VENTE_PRODUIT');
@@ -32,3 +33,6 @@
         $req="insert into membre set numero_etu='$ETU', nom='$nom'";
         mysqli_query($bdd,$req);
     }
+=======
+include_once('connect.php');
+>>>>>>> origin/Iavo-V1

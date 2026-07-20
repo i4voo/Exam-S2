@@ -1,20 +1,19 @@
 <?php
 include('../inc/function.php');
 $produits_a_vendre= produit(1);
-$nom_user = get_nom_membre(1);
-$user =$nom_user['nom'];
+$initiale = get_initiale_user($id_membre); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../asset/style.css">
     <title>Accueil</title>
 </head>
 <body>
 
     <nav>
-<<<<<<< HEAD
         <ul>
             <li><a href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
             <li><a href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
@@ -24,18 +23,6 @@ $user =$nom_user['nom'];
         <p>
             <span>[<?php echo $initiale; ?>]</span>
         </p>
-=======
-    <ul>
-        <li><a href="">Accueil</a></li>
-        <li><a href="">Mes produits</a></li>
-        <li><a href="">Mes ventes</a></li>
-    </ul>
-    <div class="topbar-user">
-        <div class="topbar-avatar"><? echo $user;?></div>
-        Mon compte
-      </div>
-    </div>
->>>>>>> origin/Iavo-V1-backend
     </nav>
 
     <h1>Produits à vendre</h1>

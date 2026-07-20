@@ -21,7 +21,7 @@ $liste_produits = get_id_produit();
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"><link rel="stylesheet" href="../asset/style.css">
     <title>Vendre un produit</title>
 </head>
 <body>
@@ -35,7 +35,6 @@ $liste_produits = get_id_produit();
         </ul>
         <p>
             <span>[<?php echo $initiale; ?>]</span>
-            <span><?php echo $nom_user; ?></span>
         </p>
     </nav>
 

@@ -25,6 +25,7 @@ if (isset($_POST['etu'])) {
     <title>Inscription</title>
 </head>
 <body>
+    
     <h2>Numéro ETU inconnu ! Veuillez saisir votre nom pour vous inscrire :</h2>
 
     <form action="traitement_login.php" method="post">

@@ -15,16 +15,18 @@ function inscription($etu, $nom) {
 }
 
 function produit($id) {
-    $sql = "SELECT pm.id_produit_membre AS idProdMembre, 
+    $sql = "SELECT m.id_membre AS idMembre, 
+                   p.id_produit AS idProd, 
+                   pm.id_produit_membre AS idProdMembre, 
                    p.nom AS nomProduit, 
                    m.nom AS nomMembre, 
-                   pm.quantite_dispo, 
-                   pm.prix_vente AS prix_reference,
+                   quantite_dispo, 
+                   prix_reference,
                    IFNULL(pm.image, p.image) AS photo_produit
             FROM produit_membre pm 
             JOIN produit p ON pm.id_produit = p.id_produit 
             JOIN membre m ON pm.id_membre = m.id_membre 
-            WHERE pm.quantite_dispo > 0 
+            WHERE m.id_membre != '$id' AND pm.quantite_dispo > 0
             ORDER BY pm.id_produit_membre DESC"; 
             
     return get_all_lines($sql);
@@ -158,10 +160,12 @@ function getProduitsFiltres($db, $recherche, $categorie) {
             ORDER BY pm.id_produit_membre DESC";
 
     return mysqli_query($db, $sql);
-} // <- Accolade rajoutée ici !
+} 
 
 function all_categorie(){
-    $sql="SELECT * from categorie";
+    $sql="SELECT p.id_produit as idProd, c.id_categorie as idCate,c.nom_categorie as nomCate, p.nom as nomProd, sum(pm.quantite_dispo) as quantite, sum(pm.prix_vente) as prix FROM vente v JOIN produit_membre pm ON v.id_produit_membre=pm.id_produit_membre 
+    JOIN produit p ON pm.id_produit=p.id_produit 
+    JOIN categorie c ON p.id_categorie=c.id_categorie group by c.id_categorie";
     return get_all_lines($sql);
 }
 
@@ -177,7 +181,7 @@ function info_vente_prod($id){
 }
 
 function info_vente_membre($id){
-    $sql="SELECT m.nom as nomMembre, pm.id_membre as idMembre, p.nom as nomProd, pm.quantite_dispo as quantite, pm.prix_vente as prix, date_vente 
+    $sql="SELECT m.nom as nomMembre, pm.id_membre as idMembre, p.nom as nomProd, pm.quantite_dispo as quantite, (pm.prix_vente * pm.quantite_dispo) as prix, date_vente 
           FROM vente v 
           JOIN produit_membre pm ON v.id_produit_membre=pm.id_produit_membre 
           JOIN produit p ON pm.id_produit=p.id_produit 
@@ -199,7 +203,11 @@ function ajouter_prod($nom, $prix, $idcate){
     mysqli_query(db_connect(), $sql);
 }
 
-function modifier_prod($nom, $prix, $idcate){
-    $sql="UPDATE produit SET nom = '$nom', id_categorie = '$idcate', prix_reference = '$prix' WHERE nom = '$nom'";
+function modifier_prod($nom, $prix, $idcate, $perime = 0){
+    $sql="UPDATE produit SET nom = '$nom', id_categorie = '$idcate', prix_reference = '$prix', perime = $perime WHERE nom = '$nom'";
     mysqli_query(db_connect(), $sql);
+}
+function get_nomcate($id){
+    $sql="SELECT nom_categorie from categorie where id_categorie='$id'";
+    return get_one_line($sql);
 }

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 include('../inc/function.php');
 
@@ -58,7 +61,7 @@ $produits = getProduitsFiltres($db, $recherche, $categorie);
 <div class="card-body bg-white rounded p-4">
 <form method="GET" action="accueil.php" class="row g-3 align-items-center">
 <div class="col-md-5">
-    <input type="text" name="recherche" class="form-control" placeholder="Nom du produit..." value="<?php echo htmlspecialchars($recherche); ?>">
+    <input type="text" name="recherche" class="form-control" placeholder="Nom du produit" value="<?php echo htmlspecialchars($recherche); ?>">
 </div>
 <div class="col-md-4">
     <select name="categorie" class="form-select">

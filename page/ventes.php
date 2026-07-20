@@ -66,7 +66,7 @@ $montant_total = get_montant_total_ventes($mes_ventes);
 <?php foreach ($mes_ventes as $v) { ?>
     <tr>
         <td class="fw-bold text-dark"><?php echo $v['produit']; ?></td>
-        <td><span class="badge bg-secondary"><?php echo $v['quantite']; ?></span></td>
+        <td><?php echo $v['quantite']; ?></td>
         <td><?php echo $v['prix_vente']; ?> Ar</td>
         <td class="text-success fw-bold"><?php echo $v['total']; ?> Ar</td>
         <td class="text-muted"><?php echo $v['date_vente']; ?></td>

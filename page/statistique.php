@@ -24,7 +24,7 @@ $categorie = all_categorie();
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
 <div class="container">
-<a class="navbar-brand fw-bold text-success" href="accueil.php?id_membre=<?php echo $id_membre; ?>">IT Mivarotra</a>
+<a class="navbar-brand fw-bold text-success" href="#">IT Mivarotra</a>
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 <span class="navbar-toggler-icon"></span>
 </button>
@@ -51,12 +51,25 @@ $categorie = all_categorie();
 <div class="card-body p-4">
 <p class="text-muted mb-4">Sélectionnez une catégorie pour consulter la répartition des ventes :</p>
 <div class="list-group">
+<table class="table table-hover mb-0">
+<thead class="table-dark">
+        <tr>
+            <th>Catégorie</th>
+            <th>Quantités</th>
+            <th>Prix total</th>
+        </tr>
+</thead>
+<tbody>
 <?php foreach($categorie as $c){ ?>
-    <a href="info_vente_produit.php?id_cat=<?php echo $c['id_categorie'];?>&id_membre=<?php echo $id_membre; ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3 border-start-0 border-end-0">
-        <span class="fw-bold text-dark"><?php echo htmlspecialchars($c['nom_categorie']);?></span>
-        <span class="btn btn-outline-success btn-sm rounded-pill px-3">Consulter →</span>
-    </a>
+    <tr>
+        <td><a href="info_vente_produit.php?id_cat=<?php echo $c['idCate'];?>&id_membre=<?php echo $id_membre; ?>" class="fw-bold text-decoration-none text-success""><?php echo htmlspecialchars($c['nomCate']);?></a></td>
+        <td><?php echo htmlspecialchars($c['quantite']);?></td>
+        <td><?php echo htmlspecialchars($c['prix']);?></td>
+    </tr>
+   
 <?php } ?>
+</tbody>
+</table>
 </div>
 </div>
 </div>

@@ -15,10 +15,15 @@ $prix = $_POST['prix'];
 if ($choix == "Ajouter") {
     ajouter_prod($nomProd, $prix, $idcate);
 } else if ($choix == "Modifier") {
-    modifier_prod($nomProd, $prix, $idcate);
+    if (isset($_POST['perime'])) {
+        $perime = $_POST['perime'];
+    } else {
+        $perime = 0;
+    }
+    modifier_prod($nomProd, $prix, $idcate, $perime);
 }
 }
 }
 
-header('Location: ajouter_modifier_prod.php');
+header('Location:ajouter_modifier_prod.php');
 exit();

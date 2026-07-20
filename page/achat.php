@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../inc/function.php');
 if (isset($_GET['id_membre'])) {
     $id_membre = $_GET['id_membre'];
@@ -19,4 +20,18 @@ $initiale = get_initiale_user($id_membre);
 </nav>
 
 
+if(isset($_GET['idProd']) && !empty($_GET['idProd'])) {
+    $id = $_GET['idProd'];
+    
+    $verif_quant = verif_quantite_produit($id);
+    
+    if($verif_quant == "indispo"){
+        $_SESSION['mess'] = "Le produit n'est plus disponible.";
+    } 
+    else if($verif_quant == "dispo"){
+        achat($id);
+    }
+}
+
+header('Location: accueil.php');
 ?>

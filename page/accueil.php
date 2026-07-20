@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../inc/function.php');
 $produits_a_vendre= produit(1);
 
@@ -32,13 +33,12 @@ $initiale = get_initiale_user($id_membre);
     </nav>
 
     <h1>Produits à vendre</h1>
-
     <ul><?php foreach($produits_a_vendre as $p){?>
         <li>Produit : <?php echo $p['nomProduit'];?></li>
         <li> Membre : <?php echo $p['nomMembre'];?></li>
         <li> Quantite : <?php echo $p['quantite_dispo'];?></li>
         <li>Prix Unitaire : <?php echo $p['prix_reference'];?></li>
-        <button><a href="achat.php?idProd =<? echo $p['idProd'];?>">Acheter</a></button>
+        <button><a href="achat.php?idProd=<? echo $p['idProdMembre'];?>"><?php if(isset($_SESSION['mess'])){ echo $_SESSION['mess'];}else{ echo "Acheter";}?></a></button>
         <?php } ?>
     </ul>
 </body>

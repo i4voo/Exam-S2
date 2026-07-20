@@ -113,3 +113,4 @@ INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, d
 (10, 1, 2000, 9, '2026-07-21'); 
 
 create or replace view produit_vendre as SELECT m.id_membre as idMembre, p.id_produit as idProd, p.nom as nomProduit, m.nom as nomMembre, quantite_dispo, prix_reference   from produit_membre pm join produit p on pm.id_produit=p.id_produit join membre m on pm.id_membre=m.id_membre;
+Select * from vente v join produit_membre pm on v.id_produit_membre=pm.id_produit_membre join produit

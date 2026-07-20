@@ -1,10 +1,22 @@
 <?php
 session_start();
 include('../inc/function.php');
-if (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {
-    $id_membre = $_GET['id_membre'];
-} else {
-    $id_membre = 1;
+if (isset($_SESSION['id_membre'])) {
+    $id_membre = $_SESSION['id_membre'];
+}
+
+
+if(isset($_GET['idProd']) && !empty($_GET['idProd'])) {
+    $id = $_GET['idProd'];
+    
+    $verif_quant = verif_quantite_produit($id);
+    
+    if($verif_quant == "indispo"){
+        $_SESSION['mess'] = "Le produit n'est plus disponible.";
+    } 
+    else if($verif_quant == "dispo"){
+        achat($id);
+    }
 }
 
 if (isset($_GET['idProd']) && !empty($_GET['idProd'])) {

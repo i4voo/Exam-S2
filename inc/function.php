@@ -130,3 +130,9 @@ function get_montant_total_ventes($mes_ventes) {
     }
     return $montant_total;
 }
+function achat($id){
+    $sql="UPDATE produit_membre SET quantite_dispo=quantite_dispo - 1 where id_produit_membre='$id'";
+    mysqli_query(db_connect(), $sql);
+    $sql2=" INSERT INTO vente (id_produit_membre, date_vente, heure, quantite) VALUES ('$id', CURDATE(), CURTIME(), 1)";
+    mysqli_query(db_connect(), $sql2);
+}

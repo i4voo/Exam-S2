@@ -1,13 +1,10 @@
 <?php
 session_start();
 include('../inc/function.php');
-if (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {
-    $id_membre = $_GET['id_membre'];
-} else {
-    $id_membre = 1;
+if (isset($_SESSION['id_membre'])) {
+    $id_membre = $_SESSION['id_membre'];
 }
-
-$produits_a_vendre = produit($id_membre);
+$produits_a_vendre= produit($id_membre);
 $initiale = get_initiale_user($id_membre);
 ?>
 <!DOCTYPE html>

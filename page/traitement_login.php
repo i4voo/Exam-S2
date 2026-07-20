@@ -1,16 +1,19 @@
 <?php
 session_start();
-include('../inc/function.php');
+include('../inc/function.php') ;
+
+if (isset($_POST['etu'], $_POST['nom'])) {
+    $id = inscription($_POST['etu'], $_POST['nom']);
+    $_SESSION['id_membre'] = $id;
+    header('Location: accueil.php');
+    exit();
+}
 
 if (isset($_POST['etu'])) {
-    $etu = $_POST['etu'];
-    $user = checklogin($etu);
-
-    if ($user) {
-        header('Location: accueil.php?id_membre=' . $user['id_membre']);
-        exit();
-    } else {
-        header('Location: ../index.php');
+    $membre = checklogin($_POST['etu']);
+    if ($membre) {
+        $_SESSION['id_membre'] = $membre['id_membre'];
+        header('Location: accueil.php');
         exit();
     }
 }
@@ -27,7 +30,7 @@ if (isset($_POST['etu'])) {
     <h2>Numéro ETU inconnu ! Veuillez saisir votre nom pour vous inscrire :</h2>
 
     <form action="traitement_login.php" method="post">
-       <input type="hidden" name="etu" value="<?php echo $etu_inconnu; ?>">
+       <input type="hidden" name="etu" value="<?php echo htmlspecialchars($etu_inconnu, ENT_QUOTES, 'UTF-8'); ?>">
         
         <p>Votre Nom : <input type="text" name="nom" required placeholder="Ex: Jean Dupont"></p>
         <input type="submit" value="S'inscrire et continuer">

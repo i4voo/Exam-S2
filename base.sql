@@ -116,7 +116,7 @@ INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, d
 
 ALTER TABLE produit_membre ADD COLUMN image VARCHAR(255) DEFAULT NULL;
 ALTER TABLE produit ADD COLUMN image VARCHAR(255);
-ALTER TABLE produit ADD COLUMN perime BOOLEAN DEFAULT FALSE;
+ALTER TABLE produit_membre ADD COLUMN perime BOOLEAN DEFAULT FALSE;
 
 
 create or replace view produit_vendre as SELECT m.id_membre as idMembre, p.id_produit as idProd, p.nom as nomProduit, m.nom as nomMembre, quantite_dispo, prix_reference   from produit_membre pm join produit p on pm.id_produit=p.id_produit join membre m on pm.id_membre=m.id_membre;

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../inc/function.php');
-
+$id_membre = $_SESSION['id_membre'];
 if (isset($_POST['cate'])) {
 $nomCate = $_POST['cate'];
 $catData = get_id_categorie($nomCate);
@@ -20,7 +20,7 @@ if ($choix == "Ajouter") {
     } else {
         $perime = 0;
     }
-    modifier_prod($nomProd, $prix, $idcate, $perime);
+    modifier_prod($id_membre,$nomProd, $prix, $idcate, $perime);
 }
 }
 }

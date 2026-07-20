@@ -203,9 +203,25 @@ function ajouter_prod($nom, $prix, $idcate){
     mysqli_query(db_connect(), $sql);
 }
 
-function modifier_prod($nom, $prix, $idcate, $perime = 0){
-    $sql="UPDATE produit SET nom = '$nom', id_categorie = '$idcate', prix_reference = '$prix', perime = $perime WHERE nom = '$nom'";
-    mysqli_query(db_connect(), $sql);
+function modifier_prod($id_membre, $nom, $prix, $idcate, $perime = 0){
+    $bdd = db_connect();
+    $sql_get = "SELECT pm.id_produit_membre, pm.id_produit 
+                FROM produit_membre pm 
+                JOIN produit p ON pm.id_produit = p.id_produit 
+                WHERE pm.id_membre = '$id_membre' AND p.nom = '$nom' 
+                LIMIT 1";
+    $res = get_one_line($sql_get);
+    
+    if ($res) {
+        $idProdMembre = $res['id_produit_membre'];
+        $id_produit = $res['id_produit'];
+        
+        $sql_prod = "UPDATE produit SET nom = '$nom', id_categorie = '$idcate' WHERE id_produit = '$id_produit'";
+        mysqli_query($bdd, $sql_prod);
+    
+        $sql_pm = "UPDATE produit_membre SET prix_vente = '$prix', perime = '$perime' WHERE id_produit_membre = '$idProdMembre'";
+        mysqli_query($bdd, $sql_pm);
+    }
 }
 function get_nomcate($id){
     $sql="SELECT nom_categorie from categorie where id_categorie='$id'";

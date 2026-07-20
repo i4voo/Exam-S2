@@ -30,7 +30,6 @@ $produits = getProduitsFiltres($db, $recherche, $categorie);
 </head>
 <body class="bg-light">
 
-<!-- Navbar Anthracite & Vert -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
 <div class="container">
 <a class="navbar-brand fw-bold text-success" href="accueil.php?id_membre=<?php echo $id_membre; ?>">IT Mivarotra</a>
@@ -42,6 +41,7 @@ $produits = getProduitsFiltres($db, $recherche, $categorie);
 <li class="nav-item"><a class="nav-link active" href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
 <li class="nav-item"><a class="nav-link" href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
 <li class="nav-item"><a class="nav-link" href="ventes.php?id_membre=<?php echo $id_membre; ?>">Mes ventes</a></li>
+<li class="nav-item"><a class="nav-link active" href="statistique.php?id_membre=<?php echo $id_membre; ?>">Statistiques</a></li>
 <li class="nav-item"><a class="nav-link text-warning" href="../index.php">Déconnexion</a></li>
 </ul>
 <span class="badge bg-success fs-6 rounded-circle p-2"><?php echo $initiale; ?></span>

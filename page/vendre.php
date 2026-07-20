@@ -31,6 +31,7 @@ $liste_produits = get_id_produit();
 <li class="nav-item"><a class="nav-link" href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
 <li class="nav-item"><a class="nav-link active" href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
 <li class="nav-item"><a class="nav-link" href="ventes.php?id_membre=<?php echo $id_membre; ?>">Mes ventes</a></li>
+<li class="nav-item"><a class="nav-link active" href="statistique.php?id_membre=<?php echo $id_membre; ?>">Statistiques</a></li>
 <li class="nav-item"><a class="nav-link text-warning" href="../index.php">Déconnexion</a></li>
 </ul>
 <span class="badge bg-success fs-6 rounded-circle p-2"><?php echo $initiale; ?></span>

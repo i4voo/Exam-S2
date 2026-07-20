@@ -1,4 +1,6 @@
+DROP DATABASE IF EXISTS VENTE_PRODUIT;
 CREATE DATABASE VENTE_PRODUIT;
+USE VENTE_PRODUIT;
 
 -- 1. Table : membre 
 CREATE TABLE membre (
@@ -117,6 +119,4 @@ Select * from vente v join produit_membre pm on v.id_produit_membre=pm.id_produi
 
 --  Ajouter la colonne image à la table produit avec default.jpg par défaut
 ALTER TABLE produit ADD COLUMN image VARCHAR(255) DEFAULT 'default.jpg';
-
---Mettre à jour les anciennes lignes de produit_membre pour qu'elles aient default.jpg
 UPDATE produit_membre SET image = 'default.jpg' WHERE image IS NULL OR image = '';

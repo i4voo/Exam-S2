@@ -53,8 +53,8 @@ quantite_dispo, date_dispo)
 ##  functions.php (Nouvelles fonctions V2) — Tanjona & Iavo
 
 ### Fonctions à ajouter / adapter
-- [ ] **Iavo** : Adapter `vendre_produit()` pour gérer le téléversement de la photo custom ou utiliser la photo par défaut du produit
-- [ ] **Iavo** : Adapter `getProduitsFiltres($db, $recherche, $categorie)` pour exclure les produits périmés (`est_perime = 0`)
+- [x] **Iavo** : Adapter `vendre_produit()` pour gérer le téléversement de la photo custom ou utiliser la photo par défaut du produit
+- [x] **Iavo** : Adapter `getProduitsFiltres($db, $recherche, $categorie)` pour exclure les produits périmés (`est_perime = 0`)
 - [x] **Tanjona** : Créer `ajouter_produit_ref($nom, $id_categorie, $prix_ref, $image_defaut)`
 - [x] **Tanjona** : Créer `modifier_produit_ref($id_produit, $nom, $id_categorie, $prix_ref, $image_defaut, $est_perime)`
 - [x] **Tanjona** : Créer `get_produit_by_id($id_produit)`
@@ -67,27 +67,27 @@ quantite_dispo, date_dispo)
 ##  accueil.php (Filtres V2) — Iavo
 
 ### Affichage
-- [ ] **HTML** : Ajouter le formulaire de filtre (champ texte pour le produit + `<select>` des catégories)
-- [ ] **HTML** : Mettre en place le bouton de validation du filtre
-- [ ] **HTML** : Afficher la photo custom du membre ou l'image par défaut (`IFNULL(pm.image, p.image)`)
-- [ ] **CSS** : Styler la barre de recherche et les sélecteurs de filtre
+- [x] **HTML** : Ajouter le formulaire de filtre (champ texte pour le produit + `<select>` des catégories)
+- [x] **HTML** : Mettre en place le bouton de validation du filtre
+- [x] **HTML** : Afficher la photo custom du membre ou l'image par défaut (`IFNULL(pm.image, p.image)`)
+- [x] **CSS** : Styler la barre de recherche et les sélecteurs de filtre
 
 ### Données
-- [ ] Récupérer les variables `$recherche` et `$id_categorie`
+- [x] Récupérer les variables `$recherche` et `$id_categorie`
 
 ### Fonctions
-- [ ] Appeler `getProduitsFiltres($db, $recherche, $categorie)`
+- [x] Appeler `getProduitsFiltres($db, $recherche, $categorie)`
 
 ### Codes
-- [ ] Récupérer les filtres passés en `GET` ou `POST`
-- [ ] Exécuter la requête filtrée et afficher dynamiquement les produits en stock non périmés
+- [x] Récupérer les filtres passés en `GET` ou `POST`
+- [x] Exécuter la requête filtrée et afficher dynamiquement les produits en stock non périmés
 
 ---
 
 ## vendre.php (Photo Plat V2) — Tanjona
 
 ### Affichage
-- [x] **HTML** : Ajouter le champ d'upload de photo `<input type="file" name="image_custom">`
+- [x] **HTML** : Ajouter le champ d'upload de photo `<input type="file" name="image_custom">`  ( insertion image tsy mety mipotra)
 - [x] **HTML** : Ajouter l'indication "Optionnel : si vide, l'image par défaut sera utilisée"
 - [x] **bootstrap** : styler le champ d'importation de fichier
 
@@ -106,44 +106,44 @@ quantite_dispo, date_dispo)
 ## gestion_produit.php (Ajout / Édition / Périmé) — Iavo
 
 ### Affichage
-- [ ] **HTML** : Créer le formulaire d'ajout / modification de produit (`nom`, `id_categorie`, `prix_reference`, `image_defaut`)
-- [ ] **HTML** : Ajouter la case à cocher `<input type="checkbox" name="est_perime"> Périmé`
-- [ ] **HTML** : Créer le tableau des produits de référence existants avec bouton "Modifier"
-- [ ] **CSS** : Appliquer un style visuel clair pour différencier les produits marqués comme "périmés"
+- [x] **HTML** : Créer le formulaire d'ajout / modification de produit (`nom`, `id_categorie`, `prix_reference`, `image_defaut`)
+- [x] **HTML** : Ajouter la case à cocher `<input type="checkbox" name="est_perime"> Périmé`
+- [x] **HTML** : Créer le tableau des produits de référence existants avec bouton "Modifier"
+- [x] **CSS** : Appliquer un style visuel clair pour différencier les produits marqués comme "périmés"
 
 ### Données
-- [ ] Manipuler la table `produit` (`id_produit`, `nom`, `id_categorie`, `prix_reference`, `image_defaut`, `est_perime`)
+- [x] Manipuler la table `produit` (`id_produit`, `nom`, `id_categorie`, `prix_reference`, `image_defaut`, `est_perime`)
 
 ### Fonctions
-- [ ] Appeler `ajouter_produit_ref()`
-- [ ] Appeler `modifier_produit_ref()`
-- [ ] Appeler `get_id_produit()`
+- [x] Appeler `ajouter_produit_ref()`
+- [x] Appeler `modifier_produit_ref()`
+- [x] Appeler `get_id_produit()`
 
 ### Codes
-- [ ] Gérer l'état du formulaire (Mode "Ajout" vs Mode "Édition" selon la présence d'un ID en `GET`)
-- [ ] Récupérer la valeur de la case à cocher `est_perime` en `POST` (1 si cochée, 0 sinon)
-- [ ] Exécuter les requêtes `INSERT` ou `UPDATE` en BDD
+- [x] Gérer l'état du formulaire (Mode "Ajout" vs Mode "Édition" selon la présence d'un ID en `GET`)
+- [x] Récupérer la valeur de la case à cocher `est_perime` en `POST` (1 si cochée, 0 sinon)
+- [x] Exécuter les requêtes `INSERT` ou `UPDATE` en BDD
 
 ---
 
 ## statistiques.php (Stats V2 par Catégorie, Produit & Membre) — Iavo
 
 ### Affichage
-- [ ] **HTML** : **Niveau 1** — Afficher le tableau/liste des ventes par catégorie avec lien vers le détail
-- [ ] **HTML** : **Niveau 2** — Afficher les ventes par produit pour la catégorie sélectionnée avec lien
-- [ ] **HTML** : **Niveau 3** — Afficher les ventes par membre pour le produit sélectionné
-- [ ] **HTML** : Ajouter des boutons "Retour" pour remonter d'un niveau
-- [ ] **CSS** : Mettre en page les cartes ou tableaux statistiques de manière claire
+- [x] **HTML** : **Niveau 1** — Afficher le tableau/liste des ventes par catégorie avec lien vers le détail
+- [x] **HTML** : **Niveau 2** — Afficher les ventes par produit pour la catégorie sélectionnée avec lien
+- [x] **HTML** : **Niveau 3** — Afficher les ventes par membre pour le produit sélectionné
+- [x] **HTML** : Ajouter des boutons "Retour" pour remonter d'un niveau
+- [x] **CSS** : Mettre en page les cartes ou tableaux statistiques de manière claire
 
 ### Données
-- [ ] Exploiter les données de `vente`, `produit_membre`, `produit`, `categorie`, `membre`
+- [x] Exploiter les données de `vente`, `produit_membre`, `produit`, `categorie`, `membre`
 
 ### Fonctions
-- [ ] Appeler `get_ventes_par_categorie()`
-- [ ] Appeler `get_ventes_par_produit($id_categorie)`
-- [ ] Appeler `get_ventes_par_membre($id_produit)`
+- [x] Appeler `get_ventes_par_categorie()`
+- [x] Appeler `get_ventes_par_produit($id_categorie)`
+- [x] Appeler `get_ventes_par_membre($id_produit)`
 
 ### Codes
-- [ ] Gérer la navigation hiérarchique avec les paramètres `GET` (`?id_categorie=...` ou `?id_produit=...`)
-- [ ] Afficher la bonne vue (Niveau 1, 2 ou 3) selon les paramètres passés dans l'URL
+- [x] Gérer la navigation hiérarchique avec les paramètres `GET` (`?id_categorie=...` ou `?id_produit=...`)
+- [x] Afficher la bonne vue (Niveau 1, 2 ou 3) selon les paramètres passés dans l'URL
 

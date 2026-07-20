@@ -6,17 +6,13 @@
 
 - [ ] produit_membre (id_produit_membre, id_produit, id_membre, prix_vente, quantite_dispo, date_dispo)
 vente (id_vente, date , heure , id_produit_membre, quantite)
+
+- [ ] vente (id_vente, date , heure , id_produit_membre, quantite)
  
 - [x] 15 produits à répartir sur plusieurs catégories
 20 produits à vendre
 
-- [ ]  membre (id_membre, nom , numero_etu, image_profil)
-categorie ( id_categorie, nom_categorie)
-produit (id_produit, nom , id_categorie, prix_reference)
-
- 
-- [x] 10 membres 
-catégorie : plat , boisson, snack , dessert
+- [ ] 20 produits à vendre
 
 ### pages à créer 
 
@@ -33,6 +29,9 @@ notion de quantité disponible.
 ### Création base de données
 - [ ] membre (id_membre, nom , numero_etu, image_profil)
 - [ ] categorie ( id_categorie, nom_categorie)
-- 
+- [ ] produit (id_produit, nom , id_categorie, prix_reference)
+- [ ] 10 membres
+- [ ]​ catégorie : plat , boisson, snack , dessert
+-
 
 

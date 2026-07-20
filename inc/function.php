@@ -163,14 +163,14 @@ function getProduitsFiltres($db, $recherche, $categorie) {
 } 
 
 function all_categorie(){
-    $sql="SELECT p.id_produit as idProd, c.id_categorie as idCate,c.nom_categorie as nomCate, p.nom as nomProd, sum(pm.quantite_dispo) as quantite, sum(pm.prix_vente) as prix FROM vente v JOIN produit_membre pm ON v.id_produit_membre=pm.id_produit_membre 
+    $sql="SELECT p.id_produit as idProd, c.id_categorie as idCate,c.nom_categorie as nomCate, p.nom as nomProd, sum(v.quantite) as quantite, (pm.prix_vente * sum(v.quantite)) as prix FROM vente v JOIN produit_membre pm ON v.id_produit_membre=pm.id_produit_membre 
     JOIN produit p ON pm.id_produit=p.id_produit 
     JOIN categorie c ON p.id_categorie=c.id_categorie group by c.id_categorie";
     return get_all_lines($sql);
 }
 
 function info_vente_prod($id){
-    $sql="SELECT pm.id_membre as idMembre, p.id_produit as idProd, p.nom as nomProd, pm.quantite_dispo as quantite, pm.prix_vente as prix, date_vente 
+    $sql="SELECT pm.id_membre as idMembre, p.id_produit as idProd, p.nom as nomProd, sum(v.quantite) as quantite, (pm.prix_vente * sum(v.quantite)) as prix, date_vente 
           FROM vente v 
           JOIN produit_membre pm ON v.id_produit_membre=pm.id_produit_membre 
           JOIN produit p ON pm.id_produit=p.id_produit 
@@ -181,7 +181,7 @@ function info_vente_prod($id){
 }
 
 function info_vente_membre($id){
-    $sql="SELECT m.nom as nomMembre, pm.id_membre as idMembre, p.nom as nomProd, pm.quantite_dispo as quantite, (pm.prix_vente * pm.quantite_dispo) as prix, date_vente 
+    $sql="SELECT m.nom as nomMembre, pm.id_membre as idMembre, p.nom as nomProd, sum(v.quantite) as quantite, (pm.prix_vente * sum(v.quantite)) as prix, date_vente 
           FROM vente v 
           JOIN produit_membre pm ON v.id_produit_membre=pm.id_produit_membre 
           JOIN produit p ON pm.id_produit=p.id_produit 

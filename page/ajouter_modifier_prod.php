@@ -4,7 +4,6 @@ include('../inc/function.php');
 if (isset($_SESSION['id_membre'])) {
     $id_membre = $_SESSION['id_membre'];
 }
-$produits_a_vendre= produit($id_membre);
 $initiale = get_initiale_user($id_membre);
 ?>
 <!DOCTYPE html>
@@ -13,11 +12,10 @@ $initiale = get_initiale_user($id_membre);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../asset/style.css">
-    <title>Accueil</title>
+    <title>Document</title>
 </head>
 <body>
-
-    <nav>
+<nav>
         <ul>
             <li><a href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
             <li><a href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
@@ -29,25 +27,13 @@ $initiale = get_initiale_user($id_membre);
             <span>[<?php echo $initiale; ?>]</span>
         </p>
     </nav>
-
-    <h1>Produits à vendre</h1>
-
-    <?php if (isset($_SESSION['mess'])) { ?>
-        <p style="color: red;"><?php echo $_SESSION['mess']; unset($_SESSION['mess']); ?></p>
-    <?php } ?>
-
-    <ul>
-        <?php foreach($produits_a_vendre as $p) { ?>
-            <li><strong>Produit :</strong> <?php echo $p['nomProduit']; ?></li>   
-            <li><strong>Vendeur :</strong> <?php echo $p['nomMembre']; ?></li>
-            <li><strong>Quantité :</strong> <?php echo $p['quantite_dispo']; ?></li>
-            <li><strong>Prix Unitaire :</strong> <?php echo $p['prix_reference']; ?> Ar</li>
-            <a href="achat.php?idProd=<?php echo $p['idProdMembre']; ?>&id_membre=<?php echo $id_membre; ?>">
-                <button>Acheter</button>
-            </a>
-            <br><br>
-        <?php } ?>
-    </ul>
-
+<form action="traitement_ajout_modif_prod.php" method=post>
+    <input type="hidden" name="idProd">
+    <input type="text" name="nomProd" placeholder="Nom du produit">
+    <input type="text" name="cate" placeholder="Categorie">
+    <input type="text" name="prix" placeholder="Prix du produit">
+    <input type="submit" value="Ajouter" name="choix">
+    <input type="submit" value="Modifier" name="choix">
+</form>
 </body>
 </html>

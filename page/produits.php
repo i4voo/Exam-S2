@@ -16,6 +16,8 @@ $initiale = get_initiale_user($id_membre);
     <li><a href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
     <li><a href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
     <li><a href="ventes.php?id_membre=<?php echo $id_membre; ?>">Mes ventes</a></li>
+
+    <li><a href="statistique.php?id_membre=<?php echo $id_membre; ?>">Statistiques</a></li>
     <li><a href="index.php">Déconnexion</a></li>
 </ul>
 <p>

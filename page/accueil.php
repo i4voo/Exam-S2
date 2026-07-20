@@ -6,12 +6,7 @@ $db = db_connect();
 
 if (isset($_SESSION['id_membre'])) {
 $id_membre = $_SESSION['id_membre'];
-} elseif (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {
-$id_membre = $_GET['id_membre'];
-} else {
-$id_membre = 1; 
 }
-
 $produits_a_vendre = produit($id_membre);
 $initiale = get_initiale_user($id_membre);
 

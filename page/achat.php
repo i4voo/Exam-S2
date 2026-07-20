@@ -1,36 +1,21 @@
 <?php
 session_start();
 include('../inc/function.php');
-
-$id_membre = isset($_GET['id_membre']) ? $_GET['id_membre'] : (isset($_SESSION['id_membre']) ? $_SESSION['id_membre'] : null);
-
-if (isset($_GET['idProd']) && !empty($_GET['idProd'])) {
-    $id = $_GET['idProd'];
-    
-    $verif_quant = verif_quantite_produit($id);
-    
-    if ($verif_quant == "indispo") {
-        $_SESSION['mess'] = "Le produit n'est plus disponible.";
-    } 
-    else if ($verif_quant == "dispo") {
-        achat($id);
-    }
-
-    header('Location: accueil.php?id_membre=' . $id_membre);
-    exit();
+if (isset($_GET['id_membre']) && !empty($_GET['id_membre'])) {
+    $id_membre = $_GET['id_membre'];
+} else {
+    $id_membre = 1;
 }
 
-$initiale = get_initiale_user($id_membre); 
+if (isset($_GET['idProd']) && !empty($_GET['idProd'])) {
+    $id_produit_membre = $_GET['idProd'];
+    $verif = verif_quantite_produit($id_produit_membre);
+    if ($verif == "dispo") {
+        achat($id_produit_membre);
+    } else {
+        $_SESSION['mess'] = "Produit indisponible !";
+    }
+}
+header('Location: accueil.php?id_membre=' . $id_membre);
+exit();
 ?>
-
-<nav>
-<ul>
-    <li><a href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
-    <li><a href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
-    <li><a href="ventes.php?id_membre=<?php echo $id_membre; ?>">Mes ventes</a></li>
-    <li><a href="index.php">Déconnexion</a></li>
-</ul>
-<p>
-    <span>[<?php echo $initiale; ?>]</span>
-</p>
-</nav>

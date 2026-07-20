@@ -1,20 +1,18 @@
 <?php
-include('../inc/function.php') ;
-if (isset($_POST['etu'], $_POST['nom'])) {
-    $id = inscription($_POST['etu'], $_POST['nom']);
-    header('Location: accueil.php?id_membre=' . $id);
-    exit();
-}
+session_start();
+include('../inc/function.php');
+
 if (isset($_POST['etu'])) {
-    $membre = checklogin($_POST['etu']);
-    if ($membre) {
-        header('Location: accueil.php?id_membre=' . $membre['id_membre']);
+    $etu = $_POST['etu'];
+    $user = checklogin($etu);
+
+    if ($user) {
+        header('Location: accueil.php?id_membre=' . $user['id_membre']);
+        exit();
+    } else {
+        header('Location: ../index.php');
         exit();
     }
-    $etu_inconnu = $_POST['etu'];
-} else {
-    header('Location: index.php');
-    exit();
 }
 ?>
 

@@ -1,3 +1,9 @@
+<?php
+include('../inc/function.php');
+$produits_a_vendre= produit(1);
+$nom_user = get_nom_membre(1);
+$user =$nom_user['nom'];
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +19,7 @@
         <li><a href="">Mes ventes</a></li>
     </ul>
     <div class="topbar-user">
-        <div class="topbar-avatar">U</div>
+        <div class="topbar-avatar"><? echo $user;?></div>
         Mon compte
       </div>
     </div>
@@ -27,12 +33,13 @@
             <td>Prix Unitaire</td>
         </tr>
     </table>
-    <ul>
-        <li>Produit : djfb</li>
-        <li> Membre : dshj</li>
-        <li> Quantite * sdhf</li>
-        <li>Prix Unitaire</li>
-        <button>Acheter</button>
+    <ul><?php foreach($produits_a_vendre as $p){?>
+        <li>Produit : <?php echo $p['nomProduit'];?></li>
+        <li> Membre : <?php echo $p['nomMembre'];?></li>
+        <li> Quantite : <?php echo $p['quantite_dispo'];?></li>
+        <li>Prix Unitaire : <?php echo $p['prix_reference'];?></li>
+        <button><a href="achat.php?idProd =<? echo $p['idProd'];?>">Acheter</a></button>
+        <?php } ?>
     </ul>
 </body>
 </html>

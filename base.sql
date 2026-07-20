@@ -1,7 +1,8 @@
-CREATE DATABASE VENTE_PRODUIT ;
+CREATE DATABASE VENTE_PRODUIT;
 
 CREATE TABLE membre (
-    numero_etu INT PRIMARY KEY,
+    id_membre INT AUTO_INCREMENT PRIMARY KEY,
+    numero_etu INT,
     nom VARCHAR(100) NOT NULL,
     image_profil VARCHAR(255)
 );
@@ -42,7 +43,7 @@ CREATE TABLE produit_membre (
 CREATE TABLE vente (
     id_vente INT AUTO_INCREMENT PRIMARY KEY,
     id_produit_membre INT NOT NULL,
-    date DATE,
+    date_vente DATE,
     heure TIME,
     quantite INT,
     CONSTRAINT fk_vente_pm 
@@ -81,3 +82,26 @@ INSERT INTO produit (nom, id_categorie, prix_reference) VALUES
 ('Barre Céréales', 3, 1020),
 ('Tarte aux Pommes', 4, 3000),
 ('Mousse au Chocolat', 4, 2050);
+
+-- INSERTION DE 20 PRODUITS A VENDRE (produit_membre)
+INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, date_dispo) VALUES
+(1, 1, 8000, 5, '2026-07-20'), 
+(2, 2, 4500, 10, '2026-07-20'), 
+(3, 3, 7000, 4, '2026-07-20'), 
+(4, 4, 1000, 20, '2026-07-20'), 
+(5, 5, 1500, 15, '2026-07-20'), 
+(6, 6, 2000, 8, '2026-07-20'),  
+(7, 7, 1000, 12, '2026-07-20'), 
+(8, 8, 1200, 10, '2026-07-20'), 
+(9, 9, 3000, 6, '2026-07-20'),  
+(10, 10, 2500, 7, '2026-07-20'),
+(1, 2, 8500, 3, '2026-07-21'), 
+(2, 3, 5000, 8, '2026-07-21'), 
+(3, 4, 6500, 5, '2026-07-21'), 
+(4, 5, 1000, 15, '2026-07-21'), 
+(5, 6, 1200, 10, '2026-07-21'),
+(6, 7, 2500, 6, '2026-07-21'), 
+(7, 8, 1100, 10, '2026-07-21'),
+(8, 9, 1000, 14, '2026-07-21'), 
+(9, 10, 2800, 4, '2026-07-21'), 
+(10, 1, 2000, 9, '2026-07-21'); 

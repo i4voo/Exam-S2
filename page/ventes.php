@@ -1,8 +1,13 @@
 <?php
 include('../inc/function.php');
-$initiale = get_initiale_user($id_membre); 
-?>
 
+if (isset($_GET['id_membre'])) {
+    $id_membre = $_GET['id_membre'];
+} else {
+    $id_membre = 1; 
+}
+
+$initiale = get_initiale_user($id_membre);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,7 +26,7 @@ $initiale = get_initiale_user($id_membre);
             <li><a href="../index.php">Déconnexion</a></li>
         </ul>
         <p>
-            <span>[<?php echo $initiale; ?>]</span>
+            <span><?php echo $initiale; ?></span>
         </p>
     </nav>
 

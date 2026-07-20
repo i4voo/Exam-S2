@@ -1,7 +1,14 @@
 <?php
 include('../inc/function.php');
 
-$id_membre = $_GET['id_membre'];
+if (isset($_GET['id_membre'])) {
+    $id_membre = $_GET['id_membre'];
+} else {
+    $id_membre = 1; 
+}
+
+$initiale = get_initiale_user($id_membre);
+
 if (isset($_POST['id_produit'], $_POST['prix_vente'], $_POST['quantite'])) {
     $id_produit = $_POST['id_produit'];
     $prix_vente = $_POST['prix_vente'];
@@ -15,7 +22,6 @@ if (isset($_POST['id_produit'], $_POST['prix_vente'], $_POST['quantite'])) {
 }
 
 $nom_user = get_nom_user($id_membre);
-$initiale = get_initiale_user($id_membre);
 $liste_produits = get_id_produit();
 ?>
 <!DOCTYPE html>

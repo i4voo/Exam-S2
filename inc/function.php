@@ -32,9 +32,15 @@ function produit_membre(){
 function verif_quantite_produit(){
 
 }
-function vendre_produit($id){
 
-} 
+function vendre_produit($id_produit, $id_membre, $prix_vente, $quantite, $date_dispo) {
+    $bdd = db_connect();
+    
+    $req = "INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, date_dispo) 
+            VALUES ('$id_produit', '$id_membre', '$prix_vente', '$quantite', '$date_dispo')";
+            
+    return mysqli_query($bdd, $req);
+}
 function ventes(){
     $sql="SELECT  FROM vente";
 }

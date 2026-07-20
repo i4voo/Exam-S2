@@ -19,7 +19,7 @@ $initiale = get_initiale_user($id_membre);
     <li><a href="index.php">Déconnexion</a></li>
 </ul>
 <p>
-    <span>[<?php echo $initiale; ?>]</span>
+    <span><?php echo $initiale; ?></span>
 </p>
 </nav>
 

@@ -1,7 +1,13 @@
 <?php
 include('../inc/function.php');
 $produits_a_vendre= produit(1);
-$initiale = get_initiale_user($id_membre); 
+
+if (isset($_GET['id_membre'])) {
+    $id_membre = $_GET['id_membre'];
+} else {
+    $id_membre = 1; 
+}
+$initiale = get_initiale_user($id_membre);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,31 +27,12 @@ $initiale = get_initiale_user($id_membre);
             <li><a href="index.php">Déconnexion</a></li>
         </ul>
         <p>
-            <span>[<?php echo $initiale; ?>]</span>
+            <span><?php echo $initiale; ?></span>
         </p>
     </nav>
 
     <h1>Produits à vendre</h1>
 
-    <table border="1">
-        <tr>
-            <th>Produit</th>
-            <th>Membre</th>
-            <th>Quantité</th>
-            <th>Prix Unitaire</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            <td>Exemple produit</td>
-            <td>Exemple membre</td>
-            <td>1</td>
-            <td>1000 Ar</td>
-            <td><button>Acheter</button></td>
-        </tr>
-    </table>
-<<<<<<< HEAD
-
-=======
     <ul><?php foreach($produits_a_vendre as $p){?>
         <li>Produit : <?php echo $p['nomProduit'];?></li>
         <li> Membre : <?php echo $p['nomMembre'];?></li>
@@ -54,6 +41,5 @@ $initiale = get_initiale_user($id_membre);
         <button><a href="achat.php?idProd =<? echo $p['idProd'];?>">Acheter</a></button>
         <?php } ?>
     </ul>
->>>>>>> origin/Iavo-V1-backend
 </body>
 </html>

@@ -16,7 +16,7 @@ if (isset($_POST['id_produit'], $_POST['prix_vente'], $_POST['quantite'])) {
     $date_dispo = date('Y-m-d'); 
 
     vendre_produit($id_produit, $id_membre, $prix_vente, $quantite, $date_dispo);
-
+ 
     header('Location: accueil.php?id_membre=' . $id_membre);
     exit();
 }

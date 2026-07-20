@@ -95,6 +95,7 @@ function get_nom_user($id_membre) {
 function get_initiale_user($id_membre) {
     $nom = get_nom_user($id_membre);
     return strtoupper($nom[0]);
+} 
 function achat($id){
     $sql="UPDATE produit_membre SET quantite_dispo=quantite_dispo - 1 where id_produit_membre='$id'";
     mysqli_query(db_connect(), $sql);

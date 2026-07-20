@@ -34,7 +34,7 @@ $initiale = get_initiale_user($id_membre);
 
     <h1>Produits à vendre</h1>
     <ul><?php foreach($produits_a_vendre as $p){?>
-        <li>Produit : <?php echo $p['nomProduit'];?></li>
+        <li>Produit : <?php echo $p['nomProduit'];?></li>   
         <li> Membre : <?php echo $p['nomMembre'];?></li>
         <li> Quantite : <?php echo $p['quantite_dispo'];?></li>
         <li>Prix Unitaire : <?php echo $p['prix_reference'];?></li>

@@ -1,10 +1,6 @@
 <?php
 include_once('connect.php');
 
-function login($etu){
-
-}
-
 function checklogin($etu) {
     $bdd = db_connect();
     $req = "SELECT * FROM membre WHERE numero_etu = '$etu'";
@@ -18,17 +14,22 @@ function inscription($etu, $nom) {
     return mysqli_insert_id($bdd);
 }
 
-function acheter_produit(){
-
-}
-function produit($id){
-    $sql = "SELECT pm.id_produit_membre AS idProdMembre, p.nom AS nomProduit, m.nom AS nomMembre, pm.quantite_dispo, pm.prix_vente AS prix_reference FROM produit_membre pm JOIN produit p ON pm.id_produit = p.id_produit JOIN membre m ON pm.id_membre = m.id_membre WHERE pm.quantite_dispo > 0 ORDER BY pm.id_produit_membre DESC"; 
+function produit($id) {
+    $sql = "SELECT pm.id_produit_membre AS idProdMembre, 
+                   p.nom AS nomProduit, 
+                   m.nom AS nomMembre, 
+                   pm.quantite_dispo, 
+                   pm.prix_vente AS prix_reference,
+                   IFNULL(pm.image, p.image) AS photo_produit
+            FROM produit_membre pm 
+            JOIN produit p ON pm.id_produit = p.id_produit 
+            JOIN membre m ON pm.id_membre = m.id_membre 
+            WHERE pm.quantite_dispo > 0 
+            ORDER BY pm.id_produit_membre DESC"; 
             
     return get_all_lines($sql);
 }
-function produit_membre(){
 
-}
 function verif_quantite_produit($id){
     $sql="SELECT quantite_dispo from produit_membre WHERE id_produit_membre='$id'";
     $quant = get_one_line($sql);
@@ -39,14 +40,16 @@ function verif_quantite_produit($id){
     }
 }
 
-function vendre_produit($id_produit, $id_membre, $prix_vente, $quantite, $date_dispo) {
-    $bdd = db_connect();
-    
-    $req = "INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, date_dispo) 
-            VALUES ('$id_produit', '$id_membre', '$prix_vente', '$quantite', '$date_dispo')";
-            
-    return mysqli_query($bdd, $req);
+function vendre_produit($id_produit, $id_membre, $prix_vente, $quantite, $date_dispo, $image = 'default.png') {
+$bdd = db_connect();
+if (empty($image)) {
+$image = 'default.png';
 }
+$req = "INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, date_dispo, image) 
+    VALUES ('$id_produit', '$id_membre', '$prix_vente', '$quantite', '$date_dispo', '$image')";       
+return mysqli_query($bdd, $req);
+}
+
 function achat($id_produit_membre) {
     $bdd = db_connect();
     $sql1 = "UPDATE produit_membre 
@@ -61,6 +64,7 @@ function achat($id_produit_membre) {
         die('Erreur lors de l enregistrement de la vente : ' . mysqli_error($bdd));
     }
 }
+
 function ventes($id) {
     $sql = "SELECT p.nom AS produit, 
                    v.quantite, 
@@ -79,15 +83,11 @@ function get_nom_membre($id){
     $sql="SELECT nom from membre where id_membre='$id'";
     return get_one_line($sql);
 }
+
 function get_id_produit(){
     $sql = "SELECT * FROM produit";
     return get_all_lines($sql);
 }
-
-function get_id_produit_membre(){
-
-} 
-
 
 function get_one_line($sql){
     $req=mysqli_query(db_connect(),$sql);
@@ -130,9 +130,29 @@ function get_montant_total_ventes($mes_ventes) {
     }
     return $montant_total;
 }
-function achat($id){
-    $sql="UPDATE produit_membre SET quantite_dispo=quantite_dispo - 1 where id_produit_membre='$id'";
-    mysqli_query(db_connect(), $sql);
-    $sql2=" INSERT INTO vente (id_produit_membre, date_vente, heure, quantite) VALUES ('$id', CURDATE(), CURTIME(), 1)";
-    mysqli_query(db_connect(), $sql2);
+
+function getProduitsFiltres($db, $recherche, $categorie)
+{
+    $conditions = array();
+    if ($recherche !== '') {
+        $rechercheEscaped = mysqli_real_escape_string($db, $recherche);
+        $conditions[] = sprintf("p.nom LIKE '%%%s%%'", $rechercheEscaped);
+    }
+    if ($categorie !== '') {
+        $categorieEscaped = mysqli_real_escape_string($db, $categorie);
+        $conditions[] = sprintf("p.id_categorie = '%s'", $categorieEscaped);
+    }
+    $where = empty($conditions) ? '1=1' : implode(' AND ', $conditions);    
+    $sql = "SELECT pm.id_produit_membre AS idProdMembre,
+                   p.nom AS nomProduit,
+                   m.nom AS nomMembre,
+                   pm.quantite_dispo,
+                   pm.prix_vente AS prix_reference
+            FROM produit_membre pm
+            INNER JOIN produit p ON pm.id_produit = p.id_produit
+            INNER JOIN membre m ON pm.id_membre = m.id_membre
+            WHERE $where AND pm.quantite_dispo > 0
+            ORDER BY pm.id_produit_membre DESC";
+
+    return mysqli_query($db, $sql);
 }

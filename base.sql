@@ -114,3 +114,9 @@ INSERT INTO produit_membre (id_produit, id_membre, prix_vente, quantite_dispo, d
 
 create or replace view produit_vendre as SELECT m.id_membre as idMembre, p.id_produit as idProd, p.nom as nomProduit, m.nom as nomMembre, quantite_dispo, prix_reference   from produit_membre pm join produit p on pm.id_produit=p.id_produit join membre m on pm.id_membre=m.id_membre;
 Select * from vente v join produit_membre pm on v.id_produit_membre=pm.id_produit_membre join produit
+
+--  Ajouter la colonne image à la table produit avec default.jpg par défaut
+ALTER TABLE produit ADD COLUMN image VARCHAR(255) DEFAULT 'default.jpg';
+
+--Mettre à jour les anciennes lignes de produit_membre pour qu'elles aient default.jpg
+UPDATE produit_membre SET image = 'default.jpg' WHERE image IS NULL OR image = '';

@@ -8,7 +8,7 @@
 <body>
     <h1>Se connecter</h1>
     <form action="page/traitement_login.php" method="post">
-        <p>Numero ETU <input type="text" name="etu" value="0000" placeholder="Numero ETU"></p>
+        <p>Numero ETU <input type="text" name="etu" value="5045" placeholder="Numero ETU"></p>
         <input type="submit" value="Se connecter">
     </form>
 </body>

@@ -1,21 +1,26 @@
-CREATE DATABASE VENTE_PRODUIT ;
+CREATE DATABASE IF NOT EXISTS VENTE_PRODUIT;
+USE VENTE_PRODUIT;
 
+-- 1. Table : membre 
 CREATE TABLE membre (
-    numero_etu INT PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
+    id_membre INT AUTO_INCREMENT PRIMARY KEY,
+    numero_etu INT NOT NULL UNIQUE,
+    nom VARCHAR(100),
     image_profil VARCHAR(255)
 );
 
+-- 2. Table : categorie
 CREATE TABLE categorie (
     id_categorie INT AUTO_INCREMENT PRIMARY KEY,
     nom_categorie VARCHAR(100) NOT NULL
 );
 
+-- 3. Table : produit
 CREATE TABLE produit (
     id_produit INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     id_categorie INT NOT NULL,
-    prix_reference  INT NOT NULL,
+    prix_reference INT NOT NULL,
     
     CONSTRAINT fk_produit_categorie 
         FOREIGN KEY (id_categorie) 
@@ -23,8 +28,7 @@ CREATE TABLE produit (
         ON DELETE RESTRICT
 );
 
-
--- Table : produit_membre 
+-- 4. Table : produit_membre 
 CREATE TABLE produit_membre (
     id_produit_membre INT AUTO_INCREMENT PRIMARY KEY,
     id_produit INT NOT NULL,
@@ -32,22 +36,26 @@ CREATE TABLE produit_membre (
     prix_vente INT,
     quantite_dispo INT,
     date_dispo DATE,
+    
     CONSTRAINT fk_pm_produit 
         FOREIGN KEY (id_produit) REFERENCES produit(id_produit),
     CONSTRAINT fk_pm_membre 
         FOREIGN KEY (id_membre) REFERENCES membre(id_membre)
 );
 
--- Table : vente 
+-- 5. Table : vente 
 CREATE TABLE vente (
     id_vente INT AUTO_INCREMENT PRIMARY KEY,
     id_produit_membre INT NOT NULL,
-    date DATE,
+    date_vente DATE,
     heure TIME,
     quantite INT,
+    
     CONSTRAINT fk_vente_pm 
         FOREIGN KEY (id_produit_membre) REFERENCES produit_membre(id_produit_membre)
 );
+
+-- INSERTIONS DE DONNÉES
 
 -- INSERTION DES CATEGORIES
 INSERT INTO categorie (nom_categorie) VALUES
@@ -56,7 +64,7 @@ INSERT INTO categorie (nom_categorie) VALUES
 ('Snack'),
 ('Dessert');
 
---INSERTION DE 10 MEMBRES 
+-- INSERTION DES 10 MEMBRES 
 INSERT INTO membre (numero_etu, nom, image_profil) VALUES
 (5045, 'Jean Dupont', 'profil_5045.jpg'),
 (5046, 'Marie Curie', 'profil_5046.jpg'),
@@ -69,7 +77,7 @@ INSERT INTO membre (numero_etu, nom, image_profil) VALUES
 (5053, 'Enzo Moreau', 'profil_5053.jpg'),
 (5054, 'Manon Laurent', 'profil_5054.jpg');
 
--- PRODUITS 
+-- INSERTION DES PRODUITS 
 INSERT INTO produit (nom, id_categorie, prix_reference) VALUES
 ('Burger Maison', 1, 8050),
 ('Sandwich Poulet', 1, 5000),

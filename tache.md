@@ -24,14 +24,14 @@ notion de quantité disponible.
 ## Tanjona partie (ETU005045)
 
 ### Création base de données
-- [ ] membre (id_membre, nom , numero_etu, image_profil)
-- [ ] categorie ( id_categorie, nom_categorie)
-- [ ] produit (id_produit, nom , id_categorie, prix_reference)
-- [ ] produit_membre (id_produit_membre, id_produit, id_membre, prix_vente,
+- [x] membre (id_membre, nom , numero_etu, image_profil)
+- [x] categorie ( id_categorie, nom_categorie)
+- [x] produit (id_produit, nom , id_categorie, prix_reference)
+- [x] produit_membre (id_produit_membre, id_produit, id_membre, prix_vente,
 quantite_dispo, date_dispo)
-- [ ] vente (id_vente, date , heure , id_produit_membre, quantite)
-- [ ] 10 membres
-- [ ]​ catégorie : plat , boisson, snack , dessert
--
+- [x] vente (id_vente, date , heure , id_produit_membre, quantite)
+- [x] 10 membres
+- [x]​ catégorie : plat , boisson, snack , dessert
+
 
 

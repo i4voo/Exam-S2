@@ -1,38 +1,49 @@
+<?php
+include('../inc/function.php');
+
+$id_membre = $_GET['id_membre'];
+
+$initiale = get_initiale_user($id_membre);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Accueil</title>
 </head>
 <body>
+
     <nav>
-    <ul>
-        <li><a href="">Accueil</a></li>
-        <li><a href="">Mes produits</a></li>
-        <li><a href="">Mes ventes</a></li>
-    </ul>
-    <div class="topbar-user">
-        <div class="topbar-avatar">U</div>
-        Mon compte
-      </div>
-    </div>
+        <ul>
+            <li><a href="accueil.php?id_membre=<?php echo $id_membre; ?>">Accueil</a></li>
+            <li><a href="vendre.php?id_membre=<?php echo $id_membre; ?>">Vendre un produit</a></li>
+            <li><a href="ventes.php?id_membre=<?php echo $id_membre; ?>">Mes ventes</a></li>
+            <li><a href="index.php">Déconnexion</a></li>
+        </ul>
+        <p>
+            <span>[<?php echo $initiale; ?>]</span>
+        </p>
     </nav>
-    <h1>Produits a vendre</h1>
-    <table>
+
+    <h1>Produits à vendre</h1>
+
+    <table border="1">
         <tr>
-            <td>Produit</td>
-            <td>Membre</td>
-            <td>Quantite</td>
-            <td>Prix Unitaire</td>
+            <th>Produit</th>
+            <th>Membre</th>
+            <th>Quantité</th>
+            <th>Prix Unitaire</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>Exemple produit</td>
+            <td>Exemple membre</td>
+            <td>1</td>
+            <td>1000 Ar</td>
+            <td><button>Acheter</button></td>
         </tr>
     </table>
-    <ul>
-        <li>Produit : djfb</li>
-        <li> Membre : dshj</li>
-        <li> Quantite * sdhf</li>
-        <li>Prix Unitaire</li>
-        <button>Acheter</button>
-    </ul>
+
 </body>
 </html>

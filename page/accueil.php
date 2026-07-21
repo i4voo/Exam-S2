@@ -82,7 +82,7 @@ $produits = getProduitsFiltres($db, $recherche, $categorie);
 </div>
 
 <!-- Filtre produit -->
-<h2 class="text-dark h4 mb-3 fw-bold">Résultats de la recherche</h2>
+<h2 class="text-dark h4 mb-3 fw-bold">Résultats de la recherche</h2>    
 <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
 <?php if (mysqli_num_rows($produits) > 0) { ?>
 <?php while ($p = mysqli_fetch_assoc($produits)) { ?>
@@ -91,6 +91,11 @@ $produits = getProduitsFiltres($db, $recherche, $categorie);
         <div class="card-body">
             <h5 class="card-title text-success fw-bold"><?php echo htmlspecialchars($p['nomProduit']); ?></h5>
             <p class="card-text mb-1"><strong>Vendeur :</strong> <?php echo htmlspecialchars($p['nomMembre']); ?></p>
+            <?php 
+                $nom_photo = $p['photo_produit'];
+                $chemin_physique = '/opt/lampp/htdocs/Exam-S2/asset/images/' . $nom_photo;
+                $photo_a_afficher = (empty($nom_photo) || !file_exists($chemin_physique)) ? 'default.png' : $nom_photo; ?>
+                <img src="/Exam-S2/asset/images/<?php echo $photo_a_afficher; ?>" class="card-img-top" style="height: 180px; object-fit: cover;">
             <p class="card-text mb-1"><strong>Stock :</strong> <span class="badge bg-secondary"><?php echo $p['quantite_dispo']; ?></span></p>
             <h6 class="text-dark fw-bold mt-2 fs-5"><?php echo $p['prix_reference']; ?> Ar</h6>
         </div>

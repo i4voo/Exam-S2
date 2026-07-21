@@ -152,7 +152,8 @@ function getProduitsFiltres($db, $recherche, $categorie) {
                    p.nom AS nomProduit,
                    m.nom AS nomMembre,
                    pm.quantite_dispo,
-                   pm.prix_vente AS prix_reference
+                   pm.prix_vente AS prix_reference ,
+                   IFNULL(pm.image, p.image) AS photo_produit 
             FROM produit_membre pm
             INNER JOIN produit p ON pm.id_produit = p.id_produit
             INNER JOIN membre m ON pm.id_membre = m.id_membre
